@@ -1,0 +1,12 @@
+Main {
+Int max;
+Int x;
+String myString1;
+myString1<-"Introdu x";
+Write myString1;
+Read x;
+If (x > 2){
+	Write x;
+}
+}
+
