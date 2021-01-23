@@ -1,0 +1,50 @@
+%{
+#include <stdio.h>
+#include <string.h>
+#include "y.tab.h"
+%}
+
+%option noyywrap
+
+STRING \"[a-zA-Z0-9_ ]*\"
+INTEGER [+-]?[1-9][0-9]*|0?
+IDENTIFIER [a-zA-Z][a-zA-Z0-9_]*
+CONSTANT {STRING}|{INTEGER}
+
+%%
+
+Main {printf("Reserved word: MAIN\n"); return MAIN;}
+Int {printf("Reserved word: INT\n"); return INT;}
+Write {printf("Reserved word: WRITE\n"); return WRITE;}
+Read {printf("Reserved word: READ\n"); return READ;}
+Bool {printf("Reserved word: BOOL\n"); return BOOL;}
+While {printf("Reserved word: WHILE\n"); return WHILE;}
+String {printf("Reserved word: STRING\n"); return STRING;}
+If {printf("Reserved word: IF\n"); return IF;}
+Else {printf("Reserved word: ELSE\n"); return ELSE;}
+
+{CONSTANT} {printf("Constant: CONSTANT\n"); return CONSTANT;}
+
+{IDENTIFIER} {printf("Identifier: IDENTIFIER\n"); return IDENTIFIER;}
+
+"+"  {printf("Operator: PLUS\n"); return PLUS;}
+"-"  {printf("Operator: MINUS\n"); return MINUS;}
+"*"  {printf("Operator: MULTIPLY\n"); return MULTIPLY;}
+"/"  {printf("Operator: DIVISION\n"); return DIVISION;}
+"<-" {printf("Operator: ASSIGNMENT\n"); return ASSIGNMENT;}
+"<"  {printf("Operator: LESS\n"); return LESS;}
+">"  {printf("Operator: GREATER\n"); return GREATER;}
+"="    {printf("Operator: EQUAL\n"); return EQUAL;}
+"!="  {printf("Operator: NOT_EQUAL\n"); return NOT_EQUAL;}
+
+"["  {printf("Separator: LEFT_SQUARE_BRACKET\n"); return LEFT_SQUARE_BRACKET;}
+"]"  {printf("Separator: RIGHT_SQUARE_BRACKET\n");return RIGHT_SQUARE_BRACKET;}
+"("  {printf("Separator: LEFT_ROUND_BRACKET\n"); return LEFT_ROUND_BRACKET;}
+")"  {printf("Separator: RIGHT_ROUND_BRACKET\n"); return RIGHT_ROUND_BRACKET;}
+"{"  {printf("Separator: LEFT_CURLY_BRACKET\n"); return LEFT_CURLY_BRACKET;}
+"}"  {printf("Separator: RIGHT_CURLY_BRACKET\n"); return RIGHT_CURLY_BRACKET;}
+";"  {printf("Separator: SEMICOLON\n"); return SEMICOLON;}
+
+[\n]+ {}
+
+%%
